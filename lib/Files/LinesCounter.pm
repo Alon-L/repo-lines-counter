@@ -46,7 +46,7 @@ sub out {
     my $main_dir = $self->{main_dir};
     my $output_path = $self->{output_path};
 
-    open(my $fh, '>', $output_path) or die "Could not open output file '$output_path' $!";
+    open(my $fh, '>', $output_path) or die "Could not open output file '$output_path': $!";
 
     # Number of total lines in the main directory
     my $total_lines = $main_dir->get_lines();

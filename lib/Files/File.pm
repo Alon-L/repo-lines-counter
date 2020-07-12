@@ -45,7 +45,7 @@ sub get_lines {
     my ($self) = @_;
     my $full_path = $self->{full_path};
 
-    open(my $fh, '<', $full_path) or die "Could not open file '$full_path' $!";
+    open(my $fh, '<', $full_path) or die "Could not open file '$full_path': $!";
 
     my $lines = 0;
     while (<$fh>) {
