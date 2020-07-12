@@ -1,4 +1,4 @@
-package files::LinesCounter;
+package Files::LinesCounter;
 
 use 5.008;
 use strict;
@@ -14,10 +14,10 @@ sub new {
     my $main_name = $args->{main_name};
 
     # Initialize the main Repo directory
-    my $dir = files::Directory->new({
-        full_path   => $main_path,
-        path        => $main_name,
-        name        => $main_name,
+    my $dir = Files::Directory->new({
+        full_path => $main_path,
+        path      => $main_name,
+        name      => $main_name,
     });
 
     # Search for all files in that directory

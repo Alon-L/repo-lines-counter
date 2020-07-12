@@ -1,4 +1,4 @@
-package File;
+package Files::File;
 
 use 5.008;
 use strict;
@@ -8,9 +8,9 @@ sub new {
     my ($class, $args) = @_;
 
     my $self = {
-        full_path   => $args->{full_path},
-        path        => $args->{path},
-        name        => $args->{name},
+        full_path => $args->{full_path},
+        path      => $args->{path},
+        name      => $args->{name},
     };
 
     bless $self, $class;

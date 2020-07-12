@@ -1,11 +1,11 @@
-package files::Directory;
+package Files::Directory;
 
 use 5.008;
 use strict;
 use warnings FATAL => 'all';
 
 use Files::File;
-our @ISA = qw(File);
+our @ISA = qw(Files::File);
 
 use constant INDENT => 8;
 
@@ -29,10 +29,10 @@ sub get_json {
     my $path = $self->{path};
     my $contents = $self->{contents};
 
-    my %contents_json = map { %{$_->get_json()} } @$contents;
+    my %contents_json = map {%{$_->get_json()}} @$contents;
     return {
         $name => {
-            path => $path,
+            path     => $path,
             contents => \%contents_json
         }
     }
@@ -94,22 +94,23 @@ sub search_contents {
 
         if (-d $content_full_path) {
             # This is a sub-directory
-            my $dir = files::Directory->new({
-                path        => $content_path,
-                full_path   => $content_full_path,
-                name        => $content_name,
-                depth       => $depth + 1,
+            my $dir = Files::Directory->new({
+                path      => $content_path,
+                full_path => $content_full_path,
+                name      => $content_name,
+                depth     => $depth + 1,
             });
 
             $dir->search_contents();
 
             $self->add_content($dir);
-        } else {
+        }
+        else {
             # This is a normal file
-            my $file = File->new({
-                path        => $content_path,
-                full_path   => $content_full_path,
-                name        => $content_name,
+            my $file = Files::File->new({
+                path      => $content_path,
+                full_path => $content_full_path,
+                name      => $content_name,
             });
 
             $self->add_content($file);
