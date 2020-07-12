@@ -14,12 +14,12 @@ use Git::Manager;
 use constant TEMP_DIR_PATH => abs_path . "/temp";
 use constant OUTPUT_FILE_PATH => abs_path . "/output.json";
 
-# Create the 'temp' directory in case it does not exist
-mkdir TEMP_DIR_PATH;
-
 # Reads the repository URL from the given arguments
 my ($repo) = @ARGV;
 die "Repository not provided" unless (defined $repo);
+
+# Create the 'temp' directory in case it does not exist
+mkdir TEMP_DIR_PATH;
 
 my $manager = Git::Manager->new({
     url           => $repo,

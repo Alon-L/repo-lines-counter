@@ -4,6 +4,7 @@ use 5.008;
 use strict;
 use warnings FATAL => 'all';
 
+use File::Basename qw(dirname);
 use File::Path 'rmtree';
 use File::Find;
 
@@ -36,7 +37,7 @@ sub clone {
     # Change the working directory into the 'temp' directory
     chdir $temp_dir_path;
     system("git", "clone", $url, "--depth", "1", "--q");
-    chdir;
+    chdir dirname(__FILE__);
 }
 
 # Returns the full path of the cloned directory and its name
