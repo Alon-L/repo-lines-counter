@@ -17,10 +17,11 @@ sub new {
 
 # Print the file name
 sub print {
-    my ($self) = @_;
+    my ($self, $output) = @_;
     my $name = $self->{name};
+    my $lines = $self->get_lines();
 
-    print "$name\n";
+    print $output "$name ($lines lines)\n";
 }
 
 # Return the total number of lines in the file
@@ -28,7 +29,7 @@ sub get_lines {
     my ($self) = @_;
     my $path = $self->{path};
 
-    open(my $fh, '<', $path) or die $!;
+    open(my $fh, '<', $path) or die "Could not open file '$path' $!";
 
     my $lines = 0;
     while (<$fh>) {

@@ -38,23 +38,23 @@ sub get_lines {
 
 # Print the indentation for this directory
 sub print_indent {
-    my ($self) = @_;
+    my ($self, $output) = @_;
     my $depth = $self->{depth};
 
-    print "└", "─" x (($depth + 1) * INDENT), " ";
+    print $output "└", "─" x (($depth + 1) * INDENT), " ";
 }
 
 # Print this directory and all of its content
 sub print {
-    my ($self) = @_;
+    my ($self, $output) = @_;
     my $name = $self->{name};
     my $contents = $self->{contents};
 
-    print "$name\n";
+    print $output "$name\n";
     # Print all content
     foreach my $content (@$contents) {
-        $self->print_indent();
-        $content->print();
+        $self->print_indent($output);
+        $content->print($output);
     }
 }
 

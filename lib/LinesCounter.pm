@@ -22,8 +22,9 @@ sub new {
     $dir->search_contents();
 
     my $self = {
-        main_path => $main_path,
-        main_dir => $dir,
+        main_path   => $main_path,
+        main_dir    => $dir,
+        output_path => $args->{output_path},
     };
 
     bless $self, $class;
@@ -35,6 +36,22 @@ sub get_lines {
     my $main_dir = $self->{main_dir};
 
     return $main_dir->get_lines();
+}
+
+# Prints the main directory's information to the output file
+sub out {
+    my ($self) = @_;
+    my $main_dir = $self->{main_dir};
+    my $output_path = $self->{output_path};
+
+    open(my $fh, '>', $output_path) or die "Could not open output file '$output_path' $!";
+
+    $main_dir->print($fh);
+
+    my $total_lines = $main_dir->get_lines();
+    print $fh "\nTotal: $total_lines lines";
+
+    close($fh);
 }
 
 1;
