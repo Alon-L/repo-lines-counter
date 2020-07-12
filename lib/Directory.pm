@@ -20,6 +20,19 @@ sub new {
     bless $self, $class;
 }
 
+sub get_lines {
+    my ($self) = @_;
+    my $contents = $self->{contents};
+
+    my $lines = 0;
+
+    foreach my $content (@$contents) {
+        $lines += $content->get_lines();
+    }
+
+    return $lines;
+}
+
 sub print_indent {
     my ($self) = @_;
     my $depth = $self->{depth};

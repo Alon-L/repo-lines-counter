@@ -27,4 +27,11 @@ sub new {
     bless $self, $class;
 }
 
+sub get_lines {
+    my ($self) = @_;
+    my $main_dir = $self->{main_dir};
+
+    return $main_dir->get_lines();
+}
+
 1;

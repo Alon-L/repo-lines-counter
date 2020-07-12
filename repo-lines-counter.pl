@@ -13,3 +13,5 @@ my $counter = LinesCounter->new({
 });
 
 $counter->{main_dir}->print();
+
+print $counter->get_lines(), "\n";
