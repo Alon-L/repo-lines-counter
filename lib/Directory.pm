@@ -7,6 +7,8 @@ use warnings FATAL => 'all';
 use File;
 our @ISA = qw(File);
 
+use constant INDENT => 8;
+
 sub new {
     my ($class, $args) = @_;
 
@@ -18,15 +20,21 @@ sub new {
     bless $self, $class;
 }
 
+sub print_indent {
+    my ($self) = @_;
+    my $depth = $self->{depth};
+
+    print "-" x (($depth + 1) * INDENT);
+}
+
 sub print {
     my ($self) = @_;
     my $name = $self->{name};
-    my $depth = $self->{depth};
     my $contents = $self->{contents};
 
     print "$name\n";
     foreach my $content (@$contents) {
-        print "-" x (($depth + 1) * 12);
+        $self->print_indent();
         $content->print();
     }
 }
