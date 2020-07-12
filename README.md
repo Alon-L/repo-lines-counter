@@ -22,7 +22,7 @@ Open your Command Line and navigate to the downloaded exe location.
 
 Type the following to run it:
 ```
-WIN_repo-lines-counter_v<YOUR VERSION> <repository URL>
+WIN_repo-lines-counter_v<YOUR VERSION>.exe <repository URL>
 ```
 
 ##### Linux
