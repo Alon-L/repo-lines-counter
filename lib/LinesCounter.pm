@@ -12,12 +12,14 @@ sub new {
     my $main_path = $args->{main_path};
     my $main_name = $args->{main_name};
 
+    # Initialize the main Repo directory
     my $dir = Directory->new({
         path => $main_path,
         name => $main_name,
     });
 
-    $dir->search_files();
+    # Search for all files in that directory
+    $dir->search_contents();
 
     my $self = {
         main_path => $main_path,
@@ -27,6 +29,7 @@ sub new {
     bless $self, $class;
 }
 
+# Return the total number of lines in the main directory
 sub get_lines {
     my ($self) = @_;
     my $main_dir = $self->{main_dir};

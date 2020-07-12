@@ -15,6 +15,7 @@ sub new {
     bless $self, $class;
 }
 
+# Print the file name
 sub print {
     my ($self) = @_;
     my $name = $self->{name};
@@ -22,6 +23,7 @@ sub print {
     print "$name\n";
 }
 
+# Return the total number of lines in the file
 sub get_lines {
     my ($self) = @_;
     my $path = $self->{path};
@@ -32,6 +34,8 @@ sub get_lines {
     while (<$fh>) {
         $lines++;
     }
+
+    close($fh);
 
     return $lines;
 }
