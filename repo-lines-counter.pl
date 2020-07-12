@@ -8,7 +8,7 @@ use Data::Dumper;
 use LinesCounter;
 
 my $counter = LinesCounter->new({
-    main_path => './temp/test-repo',
+    main_path => 'temp/test-repo',
     main_name => 'test-repo',
 });
 
