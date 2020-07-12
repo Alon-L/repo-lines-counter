@@ -24,7 +24,7 @@ sub print_indent {
     my ($self) = @_;
     my $depth = $self->{depth};
 
-    print "-" x (($depth + 1) * INDENT);
+    print "└", "─" x (($depth + 1) * INDENT), " ";
 }
 
 sub print {
