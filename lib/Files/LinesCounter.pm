@@ -29,8 +29,6 @@ sub new {
     my $ignore = Files::Ignore->new();
     $ignore->read_config();
 
-    use Data::Dumper;
-
     my $self = {
         main_path   => $main_path,
         main_dir    => $dir,
