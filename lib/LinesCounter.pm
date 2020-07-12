@@ -48,12 +48,16 @@ sub out {
 
     open(my $fh, '>', $output_path) or die "Could not open output file '$output_path' $!";
 
+    # Number of total lines in the main directory
     my $total_lines = $main_dir->get_lines();
+
+    # The outputted json
     my $json = {
         contents    => $main_dir->get_json(),
         total_lines => $total_lines,
     };
 
+    # Output our json with indentations and alphabetical keys order
     print $fh JSON->new->indent->space_after->canonical->encode($json);
 
     close($fh);

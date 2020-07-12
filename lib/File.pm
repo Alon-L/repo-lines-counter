@@ -16,6 +16,7 @@ sub new {
     bless $self, $class;
 }
 
+# Returns the JSON data for this file
 sub get_json {
     my ($self) = @_;
     my $path = $self->{path};
@@ -30,7 +31,7 @@ sub get_json {
     }
 }
 
-# Print the file name
+# Prints the file name
 sub print {
     my ($self) = @_;
     my $name = $self->{name};
@@ -39,7 +40,7 @@ sub print {
     print "$name ($lines lines)\n";
 }
 
-# Return the total number of lines in the file
+# Returns the total number of lines in the file
 sub get_lines {
     my ($self) = @_;
     my $full_path = $self->{full_path};

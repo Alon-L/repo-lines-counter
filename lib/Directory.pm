@@ -22,6 +22,7 @@ sub new {
     bless $self, $class;
 }
 
+# Returns the JSON data for this directory
 sub get_json {
     my ($self) = @_;
     my $name = $self->{name};
@@ -37,7 +38,7 @@ sub get_json {
     }
 }
 
-# Return the total number of lines of all the content this directory includes
+# Returns the total number of lines of all the content this directory includes
 sub get_lines {
     my ($self) = @_;
     my $contents = $self->{contents};
@@ -51,7 +52,7 @@ sub get_lines {
     return $lines;
 }
 
-# Print the indentation for this directory
+# Prints the indentation for this directory
 sub print_indent {
     my ($self) = @_;
     my $depth = $self->{depth};
@@ -59,7 +60,7 @@ sub print_indent {
     print "└", "─" x (($depth + 1) * INDENT), " ";
 }
 
-# Print this directory and all of its content
+# Prints this directory and all of its content
 sub print {
     my ($self) = @_;
     my $name = $self->{name};
@@ -85,7 +86,10 @@ sub search_contents {
         # Ignore "." and ".." on Unix based systems
         next if ($content_name =~ m/^\.\.?$/);
 
+        # The content path relative to the root directory
         my $content_path = $self->get_content_path($content_name);
+
+        # The full content path
         my $content_full_path = $self->get_content_full_path($content_name);
 
         if (-d $content_full_path) {
@@ -115,7 +119,7 @@ sub search_contents {
     closedir($dh);
 }
 
-# Add content to the contents array
+# Adds content to the contents array
 sub add_content {
     my ($self, $content) = @_;
     my $contents = $self->{contents};
@@ -123,7 +127,7 @@ sub add_content {
     push(@$contents, $content);
 }
 
-# Return the relative path of a content
+# Returns the relative path of a content
 sub get_content_path {
     my ($self, $content_name) = @_;
     my $path = $self->{path};
@@ -131,7 +135,7 @@ sub get_content_path {
     return "$path/$content_name";
 }
 
-# Return the full path of a content
+# Returns the full path of a content
 sub get_content_full_path {
     my ($self, $content_name) = @_;
     my $full_path = $self->{full_path};
