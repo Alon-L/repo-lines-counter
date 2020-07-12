@@ -3,7 +3,7 @@ This is a simple beginner Perl project to count the number of lines in a reposit
 You can provide a list of file and directory names which will be ignored from the count.
 
 ### Usage Guide
-See guide for installation in [Installation](#Installation).
+See guide for installation [Installation](#Installation).
 
 __Files:__
 
