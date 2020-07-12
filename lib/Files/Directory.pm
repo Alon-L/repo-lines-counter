@@ -5,9 +5,12 @@ use strict;
 use warnings FATAL => 'all';
 
 use Files::File;
+use Files::Ignore;
+
 our @ISA = qw(Files::File);
 
 use constant INDENT => 8;
+
 
 sub new {
     my ($class, $args) = @_;
@@ -101,6 +104,10 @@ sub search_contents {
 
         if (-d $content_full_path) {
             # This is a sub-directory
+
+            # Skip this directory if it's specified in the ignored files list
+            next if (Files::Ignore::is_directory_ignored($content_name));
+
             my $dir = Files::Directory->new({
                 full_path => $content_full_path,
                 path      => $content_path,
@@ -114,6 +121,10 @@ sub search_contents {
         }
         else {
             # This is a normal file
+
+            # Skip this file if it's specified in the ignored files list
+            next if (Files::Ignore::is_file_ignored($content_name));
+
             my $file = Files::File->new({
                 full_path => $content_full_path,
                 path      => $content_path,
