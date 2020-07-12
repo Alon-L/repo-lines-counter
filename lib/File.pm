@@ -8,28 +8,43 @@ sub new {
     my ($class, $args) = @_;
 
     my $self = {
-        path => $args->{path},
-        name => $args->{name},
+        full_path   => $args->{full_path},
+        path        => $args->{path},
+        name        => $args->{name},
     };
 
     bless $self, $class;
 }
 
+sub get_json {
+    my ($self) = @_;
+    my $path = $self->{path};
+    my $name = $self->{name};
+    my $total_lines = $self->get_lines();
+
+    return {
+        $name => {
+            path        => $path,
+            total_lines => $total_lines,
+        },
+    }
+}
+
 # Print the file name
 sub print {
-    my ($self, $output) = @_;
+    my ($self) = @_;
     my $name = $self->{name};
     my $lines = $self->get_lines();
 
-    print $output "$name ($lines lines)\n";
+    print "$name ($lines lines)\n";
 }
 
 # Return the total number of lines in the file
 sub get_lines {
     my ($self) = @_;
-    my $path = $self->{path};
+    my $full_path = $self->{full_path};
 
-    open(my $fh, '<', $path) or die "Could not open file '$path' $!";
+    open(my $fh, '<', $full_path) or die "Could not open file '$full_path' $!";
 
     my $lines = 0;
     while (<$fh>) {

@@ -10,7 +10,7 @@ use LinesCounter;
 my $counter = LinesCounter->new({
     main_path   => 'temp/test-repo',
     main_name   => 'test-repo',
-    output_path => 'output.txt',
+    output_path => 'output.json',
 });
 
 $counter->out();

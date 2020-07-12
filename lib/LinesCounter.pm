@@ -4,6 +4,7 @@ use 5.008;
 use strict;
 use warnings FATAL => 'all';
 
+use JSON;
 use Directory;
 
 sub new {
@@ -14,8 +15,9 @@ sub new {
 
     # Initialize the main Repo directory
     my $dir = Directory->new({
-        path => $main_path,
-        name => $main_name,
+        full_path   => $main_path,
+        path        => $main_name,
+        name        => $main_name,
     });
 
     # Search for all files in that directory
@@ -46,10 +48,13 @@ sub out {
 
     open(my $fh, '>', $output_path) or die "Could not open output file '$output_path' $!";
 
-    $main_dir->print($fh);
-
     my $total_lines = $main_dir->get_lines();
-    print $fh "\nTotal: $total_lines lines";
+    my $json = {
+        contents    => $main_dir->get_json(),
+        total_lines => $total_lines,
+    };
+
+    print $fh JSON->new->indent->space_after->canonical->encode($json);
 
     close($fh);
 }
