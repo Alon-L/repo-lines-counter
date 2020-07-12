@@ -1,15 +1,18 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
+
 use 5.008;
 use strict;
 use warnings FATAL => 'all';
 
-use File::Basename;
+use Cwd qw(abs_path);
+use File::Basename qw(dirname);
+use lib dirname(abs_path($0)) . '/lib';
 
 use Files::LinesCounter;
 use Git::Manager;
 
-use constant FILE_PATH => dirname(__FILE__);
-use constant TEMP_DIR_PATH => FILE_PATH . "/temp";
+use constant TEMP_DIR_PATH => abs_path . "/temp";
+use constant OUTPUT_FILE_PATH => abs_path . "/output.json";
 
 # Create the 'temp' directory in case it does not exist
 mkdir TEMP_DIR_PATH;
@@ -25,7 +28,9 @@ my ($main_path, $main_name) = $manager->get_cloned_dir();
 my $counter = Files::LinesCounter->new({
     main_path   => $main_path,
     main_name   => $main_name,
-    output_path => FILE_PATH . "/output.json",
+    output_path => OUTPUT_FILE_PATH,
 });
+
+print $counter->{output_path}, "\n";
 
 $counter->out();
