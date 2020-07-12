@@ -1,10 +1,10 @@
-package Directory;
+package files::Directory;
 
 use 5.008;
 use strict;
 use warnings FATAL => 'all';
 
-use File;
+use Files::File;
 our @ISA = qw(File);
 
 use constant INDENT => 8;
@@ -94,7 +94,7 @@ sub search_contents {
 
         if (-d $content_full_path) {
             # This is a sub-directory
-            my $dir = Directory->new({
+            my $dir = files::Directory->new({
                 path        => $content_path,
                 full_path   => $content_full_path,
                 name        => $content_name,

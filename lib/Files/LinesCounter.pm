@@ -1,11 +1,11 @@
-package LinesCounter;
+package files::LinesCounter;
 
 use 5.008;
 use strict;
 use warnings FATAL => 'all';
 
 use JSON;
-use Directory;
+use Files::Directory;
 
 sub new {
     my ($class, $args) = @_;
@@ -14,7 +14,7 @@ sub new {
     my $main_name = $args->{main_name};
 
     # Initialize the main Repo directory
-    my $dir = Directory->new({
+    my $dir = files::Directory->new({
         full_path   => $main_path,
         path        => $main_name,
         name        => $main_name,

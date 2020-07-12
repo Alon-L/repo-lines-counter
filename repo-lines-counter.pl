@@ -5,9 +5,9 @@ use warnings FATAL => 'all';
 
 use Data::Dumper;
 
-use LinesCounter;
+use Files::LinesCounter;
 
-my $counter = LinesCounter->new({
+my $counter = files::LinesCounter->new({
     main_path   => 'temp/test-repo',
     main_name   => 'test-repo',
     output_path => 'output.json',
