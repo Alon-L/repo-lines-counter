@@ -30,10 +30,14 @@ sub get_json {
     my $contents = $self->{contents};
 
     my %contents_json = map {%{$_->get_json()}} @$contents;
+
+    my $total_lines = $self->get_lines();
+
     return {
         $name => {
-            path     => $path,
-            contents => \%contents_json
+            path        => $path,
+            contents    => \%contents_json,
+            total_lines => $total_lines,
         }
     }
 }
@@ -42,6 +46,9 @@ sub get_json {
 sub get_lines {
     my ($self) = @_;
     my $contents = $self->{contents};
+    my $total_lines = $self->{total_lines};
+
+    return $total_lines if (defined $total_lines);
 
     my $lines = 0;
 
@@ -49,7 +56,7 @@ sub get_lines {
         $lines += $content->get_lines();
     }
 
-    return $lines;
+    return $total_lines = $lines;
 }
 
 # Prints the indentation for this directory
@@ -95,8 +102,8 @@ sub search_contents {
         if (-d $content_full_path) {
             # This is a sub-directory
             my $dir = Files::Directory->new({
-                path      => $content_path,
                 full_path => $content_full_path,
+                path      => $content_path,
                 name      => $content_name,
                 depth     => $depth + 1,
             });
@@ -108,8 +115,8 @@ sub search_contents {
         else {
             # This is a normal file
             my $file = Files::File->new({
-                path      => $content_path,
                 full_path => $content_full_path,
+                path      => $content_path,
                 name      => $content_name,
             });
 

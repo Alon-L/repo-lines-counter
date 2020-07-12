@@ -8,9 +8,10 @@ sub new {
     my ($class, $args) = @_;
 
     my $self = {
-        full_path => $args->{full_path},
-        path      => $args->{path},
-        name      => $args->{name},
+        full_path   => $args->{full_path},
+        path        => $args->{path},
+        name        => $args->{name},
+        total_lines => undef,
     };
 
     bless $self, $class;
@@ -44,6 +45,9 @@ sub print {
 sub get_lines {
     my ($self) = @_;
     my $full_path = $self->{full_path};
+    my $total_lines = $self->{total_lines};
+
+    return $total_lines if (defined $total_lines);
 
     open(my $fh, '<', $full_path) or die "Could not open file '$full_path': $!";
 
@@ -54,7 +58,7 @@ sub get_lines {
 
     close($fh);
 
-    return $lines;
+    return $self->{total_lines} = $lines;
 }
 
 1;
