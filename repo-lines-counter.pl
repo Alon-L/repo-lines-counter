@@ -8,8 +8,8 @@ use Data::Dumper;
 use LinesCounter;
 
 my $counter = LinesCounter->new({
-    dir_path => './temp/test-repo',
+    main_path => './temp/test-repo',
+    main_name => 'test-repo',
 });
 
-my $files = $counter->search_dir();
-$counter->print_dir($files);
+$counter->{main_dir}->print();
