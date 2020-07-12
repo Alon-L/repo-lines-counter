@@ -24,7 +24,7 @@ sub DESTROY {
     my $temp_dir_path = $self->{temp_dir_path};
 
     # Delete the cloned directory
-    rmtree($temp_dir_path, { keep_root => 1 }) or die "Could not remove '$temp_dir_path': $!";
+    rmtree($temp_dir_path) or die "Could not remove '$temp_dir_path': $!";
 }
 
 # Clone the repository into the 'temp' directory
