@@ -5,7 +5,9 @@ use strict;
 use warnings FATAL => 'all';
 
 use JSON;
+
 use Files::Directory;
+use Files::Ignore;
 
 sub new {
     my ($class, $args) = @_;
@@ -23,10 +25,17 @@ sub new {
     # Search for all files in that directory
     $dir->search_contents();
 
+    # Initialize ignore file
+    my $ignore = Files::Ignore->new();
+    $ignore->read_config();
+
+    use Data::Dumper;
+
     my $self = {
         main_path   => $main_path,
         main_dir    => $dir,
         output_path => $args->{output_path},
+        ignore      => $ignore,
     };
 
     bless $self, $class;

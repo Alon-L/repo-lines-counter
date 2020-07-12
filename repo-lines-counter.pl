@@ -17,8 +17,11 @@ use constant OUTPUT_FILE_PATH => abs_path . "/output.json";
 # Create the 'temp' directory in case it does not exist
 mkdir TEMP_DIR_PATH;
 
+my ($repo) = @ARGV;
+die "Repository not provided" unless (defined $repo);
+
 my $manager = Git::Manager->new({
-    url           => 'https://github.com/Alon-L/repo-lines-counter',
+    url           => $repo,
     temp_dir_path => TEMP_DIR_PATH,
 });
 
@@ -30,7 +33,5 @@ my $counter = Files::LinesCounter->new({
     main_name   => $main_name,
     output_path => OUTPUT_FILE_PATH,
 });
-
-print $counter->{output_path}, "\n";
 
 $counter->out();
